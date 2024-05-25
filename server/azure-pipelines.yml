@@ -1,0 +1,26 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: server
+    verbose: false
+
+- task: Npm@1
+  displayName: 'npm custom'
+  inputs:
+    command: custom
+    workingDir: server
+    verbose: false
+    customCommand: 'run build'
